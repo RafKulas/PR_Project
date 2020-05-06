@@ -18,10 +18,11 @@ struct player_t
 //DEPEND ON CLIENT PREFERENCES
 enum move_t
 {
-    UP,
-    LEFT,
-    RIGHT,
-    END,
+    UP = 1,
+    LEFT = 2,
+    RIGHT = 3,
+    END = 4,
+    BEYOND = 5,
 };
 
 void init_player(player_t* player);

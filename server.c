@@ -130,6 +130,7 @@ void* client_listener(void* client_socket)
 {
     int socket = *(int *)client_socket;
 	char* client_message = (char*)malloc(sizeof(char));
+    *client_message = BEYOND; 
     int index;
 	
 	for(;;) 
@@ -163,7 +164,9 @@ void* client_listener(void* client_socket)
             pthread_cond_signal(&condition_variable);
 
             pthread_mutex_unlock(&moves_queue_mutex);
+
         }
+        *client_message = BEYOND;
 	}
 	remove_client(socket);
     free(client_message);
