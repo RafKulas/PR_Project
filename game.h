@@ -14,7 +14,7 @@ struct pair_t
 struct rect_t
 {
     pair_t cords; //cords of left upper corner
-    int width, height //not point to make things simple
+    int width, height; //not point to make things simple
 };
 
 struct player_t

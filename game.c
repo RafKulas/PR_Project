@@ -1,4 +1,5 @@
 #include "game.h"
+#include <stdlib.h>
 
 #define OBSTACLES_NUMBER 10 // ??? TO CHANGE BY BOARD DESIGNER 
 #define BOARD_WIDTH 500 // ??? TO CHANGE BY BOARD DESIGNER 
