@@ -64,6 +64,8 @@ int main()
     int server_socket, client_socket;
 	sockaddr_in server_address, client_address; 
 
+    init_game(MAX_CLIENT_NUMBER);
+
 	check(server_socket = socket(AF_INET, SOCK_STREAM, 0),
      "Failed to create server socket");
 	memset(&server_address, '0', sizeof(server_address));
@@ -214,12 +216,8 @@ void* moves_handler(void* sth)
         //Obtain lock and pop message from queue when not empty
         pthread_mutex_lock(&moves_queue_mutex);
 
-        for(;;)
-        {
-            help = qpop(&moves_queue);
-            if(help!=NULL)break;
-            pthread_cond_wait(&condition_variable, &moves_queue_mutex);
-        }
+        pthread_cond_wait(&condition_variable, &moves_queue_mutex);
+        help = qpop(&moves_queue);
 
         client_move_t* client_move = (client_move_t*)(help->data);
         pthread_mutex_unlock(&moves_queue_mutex);
