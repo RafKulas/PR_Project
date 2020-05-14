@@ -1,32 +1,23 @@
 #include <SDL.h>
-#include <stdbool.h>
+#include "graphics.h"
+#include "map.h"
+
+void PrintKeyInfo( SDL_KeyboardEvent *key ){
+    if( key->type == SDL_KEYUP )
+        printf( "Release:- " );
+    else
+        printf( "Press:- " );
+    printf( "Scancode: 0x%02X", key->keysym.scancode );
+    printf( ", Name: %s \n", SDL_GetKeyName( key->keysym.sym ) );
+
+}
 
 int main()
 {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        return -1;
-    }
+    colour backDolor = BACKGROUND_COLOUR;
+    initWindow();
 
-    SDL_Window *window = SDL_CreateWindow("SDL2 Window",
-                                          SDL_WINDOWPOS_CENTERED,
-                                          SDL_WINDOWPOS_CENTERED,
-                                          680, 480,
-                                          0);
-
-    if(!window)
-    {
-        return -1;
-    }
-
-    SDL_Surface *window_surface = SDL_GetWindowSurface(window);
-
-    if(!window_surface)
-    {
-        return -1;
-    }
-
-    bool keep_window_open = true;
+    int keep_window_open = 1;
     while(keep_window_open)
     {
         SDL_Event e;
@@ -35,11 +26,21 @@ int main()
             switch(e.type)
             {
                 case SDL_QUIT:
-                    keep_window_open = false;
+                    keep_window_open = 0;
+                    break;
+                case SDL_KEYDOWN:
+                case SDL_KEYUP:
+                    PrintKeyInfo( &e.key );
                     break;
             }
-
-            SDL_UpdateWindowSurface(window);
         }
+        colourBackground(backDolor);
+
+        drawObstacles(go.obstacles, go.obstacles_number);
+
+        updateScreen();
     }
+    quitSDL();
+
+    return EXIT_SUCCESS;
 }

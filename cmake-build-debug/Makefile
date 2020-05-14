@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/RafalPC/CLionProjects/main
+CMAKE_SOURCE_DIR = /Users/RafalPC/PR_Project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/RafalPC/CLionProjects/main/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/RafalPC/PR_Project/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RafalPC/CLionProjects/main/cmake-build-debug/CMakeFiles /Users/RafalPC/CLionProjects/main/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles /Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RafalPC/CLionProjects/main/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+graphics.o: graphics.c.o
+
+.PHONY : graphics.o
+
+# target to build an object file
+graphics.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/graphics.c.o
+.PHONY : graphics.c.o
+
+graphics.i: graphics.c.i
+
+.PHONY : graphics.i
+
+# target to preprocess a source file
+graphics.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/graphics.c.i
+.PHONY : graphics.c.i
+
+graphics.s: graphics.c.s
+
+.PHONY : graphics.s
+
+# target to generate assembly for a file
+graphics.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/graphics.c.s
+.PHONY : graphics.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
+	@echo "... graphics.o"
+	@echo "... graphics.i"
+	@echo "... graphics.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
