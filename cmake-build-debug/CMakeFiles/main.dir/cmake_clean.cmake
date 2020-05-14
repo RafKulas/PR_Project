@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/main.dir/connection.c.o"
   "CMakeFiles/main.dir/graphics.c.o"
   "CMakeFiles/main.dir/main.c.o"
   "main"

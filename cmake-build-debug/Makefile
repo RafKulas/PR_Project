@@ -123,6 +123,33 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+connection.o: connection.c.o
+
+.PHONY : connection.o
+
+# target to build an object file
+connection.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/connection.c.o
+.PHONY : connection.c.o
+
+connection.i: connection.c.i
+
+.PHONY : connection.i
+
+# target to preprocess a source file
+connection.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/connection.c.i
+.PHONY : connection.c.i
+
+connection.s: connection.c.s
+
+.PHONY : connection.s
+
+# target to generate assembly for a file
+connection.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/connection.c.s
+.PHONY : connection.c.s
+
 graphics.o: graphics.c.o
 
 .PHONY : graphics.o
@@ -186,6 +213,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
+	@echo "... connection.o"
+	@echo "... connection.i"
+	@echo "... connection.s"
 	@echo "... graphics.o"
 	@echo "... graphics.i"
 	@echo "... graphics.s"

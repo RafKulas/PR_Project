@@ -3,7 +3,7 @@ project(main C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(main main.c graphics.c graphics.h game_structure.h map.h)
+add_executable(main main.c graphics.c graphics.h game_structure.h map.h connection.c)
 
 find_package(SDL2 REQUIRED)
 

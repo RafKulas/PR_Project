@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/RafalPC/PR_Project/connection.c">
+			<Option target="main"/>
+		</Unit>
+		<Unit filename="/Users/RafalPC/PR_Project/connection.h">
+			<Option target="main"/>
+		</Unit>
 		<Unit filename="/Users/RafalPC/PR_Project/game_structure.h">
 			<Option target="main"/>
 		</Unit>

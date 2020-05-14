@@ -6,7 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/Users/RafalPC/PR_Project/connection.c
+connection.h
+/Users/RafalPC/PR_Project/connection.h
+stdlib.h
+-
+
+/Users/RafalPC/PR_Project/connection.h
+game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
+sys/types.h
+-
+sys/socket.h
+-
+
+/Users/RafalPC/PR_Project/game_structure.h
+
+/Users/RafalPC/PR_Project/graphics.c
+graphics.h
+/Users/RafalPC/PR_Project/graphics.h
 
 /Users/RafalPC/PR_Project/graphics.h
 SDL.h
