@@ -31,4 +31,14 @@ typedef struct
     int board_width, board_height;
 } game_object;
 
+typedef enum
+{
+    STOP = 0,
+    UP = 1,
+    DOWN = 2,
+    LEFT = 3,
+    RIGHT = 4,
+    END = 5
+}move_t;
+
 #endif //MAIN_GAME_STRUCTURE_H

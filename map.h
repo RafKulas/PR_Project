@@ -32,6 +32,6 @@ const rect obstacles[19] = {
         (rect){{630, 30},  60,  60}
 };
 
-game_object go = {19, obstacles, 1, NULL, BOARD_WIDTH, BOARD_HEIGHT};
+game_object gmap = {19, obstacles, 1, NULL, BOARD_WIDTH, BOARD_HEIGHT};
 
 #endif //MAIN_MAP_H

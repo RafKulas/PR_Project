@@ -20,8 +20,6 @@
 #define OBSTACLE_COLOUR BLACK
 #define BACKGROUND_COLOUR WHITE
 
-
-
 typedef struct
 {
     int r;

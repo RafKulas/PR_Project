@@ -1,32 +1,59 @@
 #include <SDL.h>
 #include "graphics.h"
 #include "map.h"
+#include  <pthread.h>
+#include "game_structure.h"
 
-void keyHandler(SDL_KeyboardEvent *key, int* quitter){
+int running = 1;
+move_t direction = STOP;
+game_object *go;
+
+void *keySender(void *i){
+    while(running) {
+        if(direction!=STOP) {
+            printf("ide, bo %d\n", direction);
+            SDL_Delay(100);
+        }
+    }
+    printf("koncze\n");
+    return  NULL;
+}
+
+void *mapReceiver() {
+
+}
+
+void keyHandler(SDL_KeyboardEvent *key){
     if(key->keysym.scancode == SDL_SCANCODE_UP) {
-        pl.player_rect.cords.y-=4;
+        direction = UP;
     }
     else if(key->keysym.scancode == SDL_SCANCODE_DOWN) {
-        pl.player_rect.cords.y+=4;
+        direction = DOWN;
     }
     else if(key->keysym.scancode == SDL_SCANCODE_RIGHT) {
-        pl.player_rect.cords.x+=4;
+        direction = RIGHT;
     }
     else if(key->keysym.scancode == SDL_SCANCODE_LEFT) {
-        pl.player_rect.cords.x-=4;
+        direction = LEFT;
     }
     else if(key->keysym.scancode == SDL_SCANCODE_ESCAPE) {
-        *quitter = 0;
+        running = 0;
     }
 }
 
 int main()
 {
+    go = (game_object*)malloc(sizeof(game_object));
+
+    memcpy(go, &gmap, sizeof(gmap));
+
     colour backDolor = BACKGROUND_COLOUR;
     initWindow();
 
-    int keep_window_open = 1;
-    while(keep_window_open)
+    pthread_t w;
+    pthread_create (&w, NULL , keySender, NULL);
+
+    while(running)
     {
         SDL_Event e;
         while(SDL_PollEvent(&e) > 0)
@@ -34,10 +61,13 @@ int main()
             switch(e.type)
             {
                 case SDL_QUIT:
-                    keep_window_open = 0;
+                    running = 0;
                     break;
                 case SDL_KEYDOWN:
-                    keyHandler(&e.key, &keep_window_open);
+                    keyHandler(&e.key);
+                    break;
+                case SDL_KEYUP:
+                    direction = STOP;
                     break;
             }
         }
@@ -45,11 +75,12 @@ int main()
 
         drawPlayer(pl);
 
-        drawObstacles(go.obstacles, go.obstacles_number);
+        drawObstacles(go->obstacles, gmap.obstacles_number);
 
         updateScreen();
     }
     quitSDL();
+    pthread_join(w, NULL);
 
     return EXIT_SUCCESS;
 }

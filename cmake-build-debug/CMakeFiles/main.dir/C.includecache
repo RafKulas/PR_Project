@@ -21,6 +21,10 @@ graphics.h
 /Users/RafalPC/PR_Project/graphics.h
 map.h
 /Users/RafalPC/PR_Project/map.h
+pthread.h
+-
+game_structure.h
+/Users/RafalPC/PR_Project/game_structure.h
 
 /Users/RafalPC/PR_Project/map.h
 game_structure.h
