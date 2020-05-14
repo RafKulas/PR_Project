@@ -8,7 +8,9 @@
 #include "game_structure.h"
 #include "graphics.h"
 
-rect obstacles[19] = {
+player pl = {{{40, 40}, 40, 50}, 4};
+
+const rect obstacles[19] = {
         (rect){{0,   0}, BOARD_WIDTH, 30},
         (rect){{0,   0}, 30, BOARD_HEIGHT},
         (rect){{BOARD_WIDTH-30,0}, 30, BOARD_HEIGHT},

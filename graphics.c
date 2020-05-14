@@ -51,3 +51,7 @@ void drawObstacles(rect* obstacles, int no_obs) {
         drawRect(obstacles[i], obs_col);
     }
 }
+
+void drawPlayer(player p) {
+    drawRect(p.player_rect, (colour) PLAYER_COLOUR);
+}

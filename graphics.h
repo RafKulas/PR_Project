@@ -15,6 +15,8 @@
 
 #define WHITE {255, 255, 255, 255}
 #define BLACK {0, 0, 0, 255}
+#define RED {255, 0, 0, 244}
+#define PLAYER_COLOUR RED
 #define OBSTACLE_COLOUR BLACK
 #define BACKGROUND_COLOUR WHITE
 
@@ -38,6 +40,7 @@ void colourBackground(colour color);
 void updateScreen();
 void quitSDL();
 void drawObstacles(rect* obstacles, int no_obs);
+void drawPlayer(player p);
 
 
 #endif //MAIN_GRAPHICS_H

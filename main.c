@@ -2,14 +2,22 @@
 #include "graphics.h"
 #include "map.h"
 
-void PrintKeyInfo( SDL_KeyboardEvent *key ){
-    if( key->type == SDL_KEYUP )
-        printf( "Release:- " );
-    else
-        printf( "Press:- " );
-    printf( "Scancode: 0x%02X", key->keysym.scancode );
-    printf( ", Name: %s \n", SDL_GetKeyName( key->keysym.sym ) );
-
+void keyHandler(SDL_KeyboardEvent *key, int* quitter){
+    if(key->keysym.scancode == SDL_SCANCODE_UP) {
+        pl.player_rect.cords.y-=4;
+    }
+    else if(key->keysym.scancode == SDL_SCANCODE_DOWN) {
+        pl.player_rect.cords.y+=4;
+    }
+    else if(key->keysym.scancode == SDL_SCANCODE_RIGHT) {
+        pl.player_rect.cords.x+=4;
+    }
+    else if(key->keysym.scancode == SDL_SCANCODE_LEFT) {
+        pl.player_rect.cords.x-=4;
+    }
+    else if(key->keysym.scancode == SDL_SCANCODE_ESCAPE) {
+        *quitter = 0;
+    }
 }
 
 int main()
@@ -29,12 +37,13 @@ int main()
                     keep_window_open = 0;
                     break;
                 case SDL_KEYDOWN:
-                case SDL_KEYUP:
-                    PrintKeyInfo( &e.key );
+                    keyHandler(&e.key, &keep_window_open);
                     break;
             }
         }
         colourBackground(backDolor);
+
+        drawPlayer(pl);
 
         drawObstacles(go.obstacles, go.obstacles_number);
 
