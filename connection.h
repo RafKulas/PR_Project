@@ -12,3 +12,5 @@
 #define BUFOR_SIZE_CHAR BUFOR_SIZE_INT * INT_SIZE
 
 #define BUFOR_START 0
+
+void recv_structure(int sock, game_object* pdata);

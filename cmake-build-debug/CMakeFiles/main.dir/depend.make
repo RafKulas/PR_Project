@@ -55,6 +55,7 @@ CMakeFiles/main.dir/graphics.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/S
 CMakeFiles/main.dir/graphics.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/begin_code.h
 CMakeFiles/main.dir/graphics.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/close_code.h
 
+CMakeFiles/main.dir/main.c.o: ../connection.h
 CMakeFiles/main.dir/main.c.o: ../game_structure.h
 CMakeFiles/main.dir/main.c.o: ../graphics.h
 CMakeFiles/main.dir/main.c.o: ../main.c

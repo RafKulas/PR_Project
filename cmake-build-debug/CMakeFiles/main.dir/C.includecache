@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/RafalPC/PR_Project/connection.h
+game_structure.h
+/Users/RafalPC/PR_Project/game_structure.h
+sys/types.h
+-
+sys/socket.h
+-
+
 /Users/RafalPC/PR_Project/game_structure.h
 
 /Users/RafalPC/PR_Project/graphics.h
@@ -33,6 +41,8 @@ map.h
 /Users/RafalPC/PR_Project/map.h
 game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
+connection.h
+/Users/RafalPC/PR_Project/connection.h
 
 /Users/RafalPC/PR_Project/map.h
 game_structure.h
