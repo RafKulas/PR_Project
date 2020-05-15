@@ -1,7 +1,6 @@
 #include <SDL.h>
 #include <sys/socket.h>
 #include <pthread.h>
-#include <unistd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "graphics.h"
@@ -117,9 +116,9 @@ int main()
         }
         colourBackground(backColor);
 
-        drawPlayer(pl);
+        drawObstacles(game->obstacles, game->obstacles_number);
 
-        drawObstacles(gmap.obstacles, gmap.obstacles_number);
+        drawPlayer(game->players[0]);
 
         updateScreen();
     }

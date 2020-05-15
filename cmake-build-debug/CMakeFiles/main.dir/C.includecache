@@ -29,8 +29,6 @@ sys/socket.h
 -
 pthread.h
 -
-unistd.h
--
 netinet/in.h
 -
 arpa/inet.h
