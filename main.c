@@ -23,10 +23,13 @@ void *keySender(void* add_sock){
             printf("ide, bo %d\n", direction);
             buff[0] = direction;
             send(sock, (char*)buff, 1, 0);
+            if(direction == END) {
+                printf("Wyslalem wyjscie\n");
+                running = 0;
+            }
             SDL_Delay(64);
         }
     }
-    printf("koncze\n");
     return  NULL;
 }
 
@@ -35,7 +38,6 @@ void *mapReceiver(void* add_sock) {
     while(running) {
         recv_structure(sock, game);
     }
-    printf("koncze\n");
     return  NULL;
 }
 
@@ -53,7 +55,7 @@ void keyHandler(SDL_KeyboardEvent *key){
         direction = LEFT;
     }
     else if(key->keysym.scancode == SDL_SCANCODE_ESCAPE) {
-        running = 0;
+        direction = END;
     }
 }
 
@@ -62,6 +64,7 @@ int main()
     game = (game_object*)malloc(sizeof(game_object));
     game->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
     game->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
+
 
     /////////////socket
     int sock = 0;
@@ -81,11 +84,14 @@ int main()
         return -1;
     }
 
+
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
     {
         printf("\nConnection Failed \n");
         return -1;
     }
+    printf("doszlo\n");
+
     ///////////socket
 
     colour backColor = BACKGROUND_COLOUR;
@@ -104,7 +110,9 @@ int main()
             switch(e.type)
             {
                 case SDL_QUIT:
+                    direction = END;
                     running = 0;
+                    pthread_cancel(mr);
                     break;
                 case SDL_KEYDOWN:
                     keyHandler(&e.key);
@@ -118,13 +126,13 @@ int main()
 
         drawObstacles(game->obstacles, game->obstacles_number);
 
-        drawPlayer(game->players[0]);
+        drawPlayers(game->players, game->players_amount);
 
         updateScreen();
     }
     quitSDL();
     pthread_join(ks, NULL);
-    pthread_join(mr, NULL);
 
+    printf("Koncze program");
     return EXIT_SUCCESS;
 }

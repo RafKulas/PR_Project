@@ -38,7 +38,8 @@ void colourBackground(colour color);
 void updateScreen();
 void quitSDL();
 void drawObstacles(rect* obstacles, int no_obs);
-void drawPlayer(player p);
+void drawPlayer(player p, colour c);
+void drawPlayers();
 
 
 #endif //MAIN_GRAPHICS_H

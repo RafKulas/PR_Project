@@ -10,7 +10,7 @@ int initWindow() {
                                           SDL_WINDOWPOS_CENTERED,
                                           BOARD_WIDTH,
                                           BOARD_HEIGHT,
-                                          0);
+                              SDL_WINDOW_BORDERLESS);
     RENDERER = NULL;
     if(!WINDOW)
     {
@@ -52,6 +52,12 @@ void drawObstacles(rect* obstacles, int no_obs) {
     }
 }
 
-void drawPlayer(player p) {
-    drawRect(p.player_rect, (colour) PLAYER_COLOUR);
+void drawPlayer(player p, colour c) {
+    drawRect(p.player_rect, c);
+}
+
+void drawPlayers(player* pl, int player_amount) {
+    for(int i = 0; i<player_amount; i++) {
+        drawPlayer(pl[i], (colour){(100*i)%256, (99*i+60)%256, (i*30+100)%256, 255});
+    }
 }
