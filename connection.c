@@ -65,7 +65,6 @@ void recv_structure(int sock, game_object* pdata)
 	int buffer[BUFOR_SIZE_INT];
 	recv(sock, (char *)buffer, BUFOR_SIZE_CHAR, NO_FLAGS);
 
-	debug_printf(pdata);
 	pdata->obstacles_number = buffer[BUFOR_START];
 
 	for (int i = 0; i < pdata->obstacles_number; ++i)
