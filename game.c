@@ -182,8 +182,8 @@ bool_t check_obstacles(rect_t rect)
         ho = game_object.obstacles[i].height;
         
         //if player is in obstacle area
-        if(xr>(xo-wr)&&xr<(xo+wo))return FALSE;
-        if(yr>(yo-hr)&&yr<(yo+ho))return FALSE;
+        if(xr>(xo-wr)&&xr<(xo+wo)&&
+            yr>(yo-hr)&&yr<(yo+ho))return FALSE;
     }
     return TRUE;
 }
