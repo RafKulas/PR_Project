@@ -40,7 +40,6 @@ void recv_structure(int sock, game_object* pdata)
 
 	pdata->obstacles_number = buffer[BUFOR_START];
 
-	pdata->obstacles = (rect*)malloc(RECT_SIZE * pdata->obstacles_number);
 	for (int i = 0; i < pdata->obstacles_number; ++i)
 	{
 		pdata->obstacles[i].cords.x = buffer[RECT_SIZE * i + 1];
@@ -51,7 +50,6 @@ void recv_structure(int sock, game_object* pdata)
 
 	pdata->players_amount = buffer[1 + buffer[0] * RECT_SIZE];
 
-	pdata->players = (player*)malloc(PLAYER_SIZE * pdata->players_amount);
 	for (int i = 0; i < pdata->players_amount; ++i)
 	{
 		pdata->players[i].player_rect.cords.x = buffer[PLAYER_SIZE * i + 2 + buffer[0] * RECT_SIZE];

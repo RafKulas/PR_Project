@@ -1,18 +1,25 @@
 #include <SDL.h>
+#include <sys/socket.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include "graphics.h"
 #include "map.h"
-#include  <pthread.h>
 #include "game_structure.h"
 
 int running = 1;
 move_t direction = STOP;
-game_object *go;
+game_object *game;
 
-void *keySender(void *i){
+void *keySender(void *socket_desc){
+    //int sock = * (int *)socket_desc;
+    int read_size;
     while(running) {
         if(direction!=STOP) {
             printf("ide, bo %d\n", direction);
-            SDL_Delay(100);
+            //write(sock , &direction , sizeof(direction));
+            SDL_Delay(64);
         }
     }
     printf("koncze\n");
@@ -43,15 +50,30 @@ void keyHandler(SDL_KeyboardEvent *key){
 
 int main()
 {
-    go = (game_object*)malloc(sizeof(game_object));
+    game = (game_object*)malloc(sizeof(game_object));
+    game->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
+    game->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
 
-    memcpy(go, &gmap, sizeof(gmap));
+    pthread_t thread_id;
+
+    int listenfd = 0;
+    int connfd = 0;
+    struct sockaddr_in serv_addr;
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    memset(&serv_addr, '0', sizeof(serv_addr));
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_addr.sin_port = htons(5000);
+
+    bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 
     colour backDolor = BACKGROUND_COLOUR;
     initWindow();
 
     pthread_t w;
-    pthread_create (&w, NULL , keySender, NULL);
+    pthread_create(&w, NULL , keySender, NULL);
 
     while(running)
     {
@@ -75,7 +97,7 @@ int main()
 
         drawPlayer(pl);
 
-        drawObstacles(go->obstacles, gmap.obstacles_number);
+        drawObstacles(gmap.obstacles, gmap.obstacles_number);
 
         updateScreen();
     }

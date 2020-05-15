@@ -6,25 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/RafalPC/PR_Project/connection.c
-connection.h
-/Users/RafalPC/PR_Project/connection.h
-stdlib.h
--
-
-/Users/RafalPC/PR_Project/connection.h
-game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
-sys/types.h
--
-sys/socket.h
--
-
-/Users/RafalPC/PR_Project/game_structure.h
-
-/Users/RafalPC/PR_Project/graphics.c
-graphics.h
-/Users/RafalPC/PR_Project/graphics.h
 
 /Users/RafalPC/PR_Project/graphics.h
 SDL.h
@@ -35,12 +17,20 @@ game_structure.h
 /Users/RafalPC/PR_Project/main.c
 SDL.h
 -
+sys/socket.h
+-
+pthread.h
+-
+unistd.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
 graphics.h
 /Users/RafalPC/PR_Project/graphics.h
 map.h
 /Users/RafalPC/PR_Project/map.h
-pthread.h
--
 game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
 
