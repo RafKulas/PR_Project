@@ -5,40 +5,48 @@
 #ifndef MAIN_GAME_STRUCTURE_H
 #define MAIN_GAME_STRUCTURE_H
 
-typedef struct
-{
-    int x, y;
-} pair;
+typedef struct player_t player_t;
+typedef struct pair_t pair_t;
+typedef struct rect_t rect_t;
+typedef enum move_t move_t;
+typedef enum bool_t bool_t;
+typedef struct game_object_t game_object_t;
 
-typedef struct
+struct pair_t
 {
-    pair cords;
-    int width, height;
-} rect;
+    int x,y;
+};
 
-typedef struct
+struct rect_t
 {
-    rect player_rect;
+    pair_t cords; //cords of left upper corner
+    int width, height; //not point to make things simple
+};
+
+struct player_t
+{
+    rect_t player_rect;
     int vel;
-} player;
+};
 
-typedef struct
+//DEPEND ON CLIENT PREFERENCES
+enum move_t
 {
-    int obstacles_number;
-    rect* obstacles;
-    int players_amount;
-    player* players;
-    int board_width, board_height;
-} game_object;
-
-typedef enum
-{
-    STOP = 0,
     UP = 1,
     DOWN = 2,
     LEFT = 3,
     RIGHT = 4,
-    END = 5
-}move_t;
+    END = 5,
+    BEYOND = 6,
+};
+
+struct game_object_t
+{
+    int obstacles_number;
+    rect_t* obstacles;
+    int players_index;
+    player_t* players;
+    int board_width,board_height; //not point to make things simple
+};
 
 #endif //MAIN_GAME_STRUCTURE_H

@@ -1,3 +1,5 @@
+#include "game_structure.h"
+/*
 typedef struct player_t player_t;
 typedef struct pair_t pair_t;
 typedef struct rect_t rect_t;
@@ -33,13 +35,13 @@ enum move_t
     END = 5,
     BEYOND = 6,
 };
-
+*/
 enum bool_t
 {
     FALSE,
     TRUE,
 };
-
+/*
 struct game_object_t
 {
     int obstacles_number;
@@ -48,12 +50,13 @@ struct game_object_t
     player_t* players;
     int board_width,board_height; //not point to make things simple
 };
+*/
 
-void init_player(player_t* player);
+void init_player(player_t** player);
 
-void remove_player(player_t* player);
+void remove_player(player_t** player);
 
-void make_move(player_t* player, move_t move);
+void make_move(player_t** player, move_t move);
 
 void init_game(int max_client_number);
 
@@ -62,3 +65,7 @@ bool_t check_obstacles(rect_t rect);
 int min(int a, int b);
 
 int max(int a, int b);
+
+void send_s(int socket);
+
+void printGame();

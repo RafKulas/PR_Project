@@ -11,7 +11,7 @@
 #include "priority_queue_list.h"
 
 #define MAX_CLIENT_NUMBER 3
-#define PORT 5000
+#define PORT 8080
 #define BACKLOG 10
 
 typedef struct client_t client_t;
@@ -62,7 +62,7 @@ int main()
     clients_array.index = 0;
 
     int server_socket, client_socket;
-	sockaddr_in server_address, client_address; 
+	sockaddr_in server_address;
 
     init_game(MAX_CLIENT_NUMBER);
 
@@ -111,7 +111,7 @@ void accept_handler(int client_socket)
     pthread_mutex_lock(&clients_array_mutex);
 
     //initialize player at game side
-    init_player(clients_array.clients_array[clients_array.index].pplayer);
+    init_player(&clients_array.clients_array[clients_array.index].pplayer);
 
     //set connection id
     clients_array.clients_array[clients_array.index].client_socket = client_socket;
@@ -184,7 +184,7 @@ void remove_client(int socket)
     int index = find_index(socket);
 
     //remove player at game side
-    remove_player(clients_array.clients_array[index].pplayer);
+    remove_player(&clients_array.clients_array[index].pplayer);
 
     for(int i=index;i<(clients_array.index-1);i++)
     {
@@ -229,18 +229,13 @@ void* moves_handler(void* sth)
         free(help);
 
         if(index!=-1)
-            make_move(clients_array.clients_array[index].pplayer, client_move->move);
+            make_move(&clients_array.clients_array[index].pplayer, client_move->move);
 
         //Broadcast message to all connected clients
         for(int i = 0; i < clients_array.index; i++)
         {
             int socket = clients_array.clients_array[i].client_socket;
-            /*
-            
-            TODO:
-            HERE GOES SENDING FUNCTION
-            
-            */
+            send_s(socket);
         }
 
         pthread_mutex_unlock(&clients_array_mutex);
