@@ -69,7 +69,8 @@ int main()
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if(server_socket < 0)
     {
-        printf("Failed to create server socket\n");
+	perror(NULL);
+        printf("\nFailed to create server socket\n");
         return 1;
     }
 	memset(&server_address, '0', sizeof(server_address));
