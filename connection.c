@@ -88,4 +88,5 @@ void recv_structure(int sock, game_object* pdata)
 
 	pdata->board_width  = buffer[1 + buffer[0] * RECT_SIZE + 1 + buffer[1 + buffer[0] * RECT_SIZE] * PLAYER_SIZE];
 	pdata->board_height = buffer[1 + buffer[0] * RECT_SIZE + 1 + buffer[1 + buffer[0] * RECT_SIZE] * PLAYER_SIZE + 1];
+	debug_printf(pdata);
 }

@@ -9,12 +9,14 @@
 #include "connection.h"
 
 #define PORT 8080
-#define IP "127.0.0.1"
+#define IP "153.19.216.3"
 
 int running = 1;
 move_t direction = STOP;
 game_object *game;
 char buff[1];
+
+pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *keySender(void* add_sock){
     int sock = *(int*)add_sock;
@@ -36,7 +38,10 @@ void *keySender(void* add_sock){
 void *mapReceiver(void* add_sock) {
     int sock = *(int*)add_sock;
     while(running) {
+        //pthread_mutex_lock(&map_mutex);
+
         recv_structure(sock, game);
+        //pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
 }
@@ -90,7 +95,6 @@ int main()
         printf("\nConnection Failed \n");
         return -1;
     }
-    printf("doszlo\n");
 
     ///////////socket
 
@@ -124,9 +128,12 @@ int main()
         }
         colourBackground(backColor);
 
+        //pthread_mutex_lock(&map_mutex);
         drawObstacles(game->obstacles, game->obstacles_number);
-
         drawPlayers(game->players, game->players_amount);
+        //pthread_mutex_unlock(&map_mutex);
+
+
 
         updateScreen();
     }
