@@ -69,7 +69,8 @@ int main()
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if(server_socket < 0)
     {
-        printf("Failed to create server socket\n");
+	perror(NULL);
+        printf("\nFailed to create server socket\n");
         return 1;
     }
 	memset(&server_address, '0', sizeof(server_address));
@@ -80,12 +81,14 @@ int main()
 
     if(bind(server_socket, (sockaddr*)&server_address, sizeof(server_address)) < 0)
     {
+	perror(NULL);
         printf("Failed to bind\n");
         return 1;
     }
 
     if(listen(server_socket, BACKLOG) < 0)
     {
+	perror(NULL);
         printf("Failed to listen\n");
         return 1;
     }
