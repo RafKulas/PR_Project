@@ -81,12 +81,14 @@ int main()
 
     if(bind(server_socket, (sockaddr*)&server_address, sizeof(server_address)) < 0)
     {
+	perror(NULL);
         printf("Failed to bind\n");
         return 1;
     }
 
     if(listen(server_socket, BACKLOG) < 0)
     {
+	perror(NULL);
         printf("Failed to listen\n");
         return 1;
     }
