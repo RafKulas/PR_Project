@@ -66,38 +66,47 @@ int main()
 
     init_game(MAX_CLIENT_NUMBER);
 
-	check(server_socket = socket(AF_INET, SOCK_STREAM, 0),
-     "Failed to create server socket");
+    server_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if(server_socket < 0)
+    {
+        printf("Failed to create server socket\n");
+        return 1;
+    }
 	memset(&server_address, '0', sizeof(server_address));
 
 	server_address.sin_family = AF_INET;
 	server_address.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_address.sin_port = htons(PORT); 
 
-	check(bind(server_socket, (sockaddr*)&server_address, sizeof(server_address)),
-    "Failed to bind"); 
+    if(bind(server_socket, (sockaddr*)&server_address, sizeof(server_address)) < 0)
+    {
+        printf("Failed to bind\n");
+        return 1;
+    }
 
-	check(listen(server_socket, BACKLOG),
-        "Failed to listen");
+    if(listen(server_socket, BACKLOG) < 0)
+    {
+        printf("Failed to listen\n");
+        return 1;
+    }
 
     pthread_t thread_id;
     pthread_create(&thread_id, NULL, moves_handler, NULL);
 
 	for (;;) 
     {
-		check(client_socket = accept(server_socket, (sockaddr*)NULL, NULL),
-        "Failed to accept");
+		client_socket = accept(server_socket, (sockaddr*)NULL, NULL);
+        if(client_socket<0)
+        {
+            printf("Failed to accept\n");
+            return 1;
+        }
 
 		printf("Client connected\n");
 
         accept_handler(client_socket);		
 	}
     return 0;
-}
-
-void check(int result,const char* message)
-{
-    if(result == -1)printf("%s\n", message);
 }
 
 void accept_handler(int client_socket)
