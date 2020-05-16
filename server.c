@@ -104,7 +104,8 @@ int main()
 
 		printf("Client connected\n");
 
-        accept_handler(client_socket);		
+        accept_handler(client_socket);
+		
 	}
     return 0;
 }
@@ -127,6 +128,9 @@ void accept_handler(int client_socket)
 
     //increase amount of players
     clients_array.index++;
+
+    //first send to player
+    send_s(client_socket);
 
     pthread_mutex_unlock(&clients_array_mutex);
 
@@ -153,8 +157,11 @@ void* client_listener(void* client_socket)
         if(*client_message>=UP && *client_message<=END)
         {
             //termination condition
-            if(*client_message == END)break;
-
+            if(*client_message == END)
+            {
+                printf("Client left\n");
+                break;
+            }
             //increase number of client requests
             pthread_mutex_lock(&clients_array_mutex);
 
