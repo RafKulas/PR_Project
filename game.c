@@ -85,8 +85,8 @@ void remove_player(player_t** player)
 
 void make_move(player_t** player, move_t move)
 {
-    rect_t hyp_player;
-    pair_t max_cords;
+    rect_t_player hyp_player;
+    pair_t_player max_cords;
     hyp_player.width = (*player)->player_rect.width;
     hyp_player.height = (*player)->player_rect.height;
     max_cords.x = hyp_player.cords.x = (*player)->player_rect.cords.x;
@@ -156,7 +156,7 @@ void init_game(int max_client_number)
    }
 }
 
-bool_t check_obstacles(rect_t rect)
+bool_t check_obstacles(rect_t_player rect)
 {
     int xo,yo,wo,ho,xr,yr,wr,hr;
     xr = rect.cords.x;
