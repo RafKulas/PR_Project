@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 #define OBSTACLES_NUMBER 19
-#define BOARD_WIDTH     960
-#define BOARD_HEIGHT    480
+#define BOARD_WIDTH     32
+#define BOARD_HEIGHT    16
 #define PLAYER_WIDTH 10 
 #define PLAYER_HEIGHT 10 
 
