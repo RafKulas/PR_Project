@@ -133,7 +133,7 @@ void accept_handler(int client_socket)
     clients_array.index++;
 
     //first send to player
-    send_s(client_socket);
+    send_init_s(client_socket);
 
     pthread_mutex_unlock(&clients_array_mutex);
 
