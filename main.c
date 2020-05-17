@@ -122,7 +122,6 @@ int main()
             {
                 case SDL_QUIT:
                     direction = END;
-                    running = 0;
                     pthread_cancel(mr);
                     break;
                 case SDL_KEYDOWN:
@@ -139,8 +138,6 @@ int main()
         drawObstacles(game->obstacles, game->obstacles_number);
         drawPlayers(game->players, game->players_index);
         //pthread_mutex_unlock(&map_mutex);
-
-
 
         updateScreen();
     }
