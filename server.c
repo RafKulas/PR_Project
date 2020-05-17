@@ -147,14 +147,14 @@ void accept_handler(int client_socket)
 void* client_listener(void* client_socket)
 {
     int socket = *(int *)client_socket;
-	char* client_message = (char*)malloc(sizeof(char));
+	char* client_message = (char*)malloc(sizeof(char)*8);
     *client_message = BEYOND; 
     int index;
 	
 	for(;;) 
     {
 		//receive message
-        recv(socket , client_message , 1 , 0);
+        recv(socket , client_message , 8 , 0);
 
         //if message is in accordance with contract with client
         if(*client_message>=UP && *client_message<=END)
