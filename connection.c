@@ -30,7 +30,7 @@ void send_structure(int sock, game_object_t* pdata)
 
 	buffer[1 + buffer[0] * RECT_SIZE + 1 + buffer[1 + buffer[0] * RECT_SIZE] * PLAYER_SIZE] = pdata->board_width;
 	buffer[1 + buffer[0] * RECT_SIZE + 1 + buffer[1 + buffer[0] * RECT_SIZE] * PLAYER_SIZE + 1] = pdata->board_height;
-
+	debug_printf(pdata);
 	send(sock, (char *)(buffer), (1 + buffer[0] * RECT_SIZE + 1 + buffer[1 + buffer[0] * RECT_SIZE] * PLAYER_SIZE + 1 + 1) * INT_SIZE, NO_FLAGS);
 }
 
