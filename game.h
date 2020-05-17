@@ -60,7 +60,7 @@ void make_move(player_t** player, move_t move);
 
 void init_game(int max_client_number);
 
-bool_t check_obstacles(rect_t rect);
+bool_t check_obstacles(rect_t_player rect);
 
 int min(int a, int b);
 
