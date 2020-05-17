@@ -164,14 +164,14 @@ bool_t check_obstacles(rect_t rect)
     hr = rect.height;
     wr = rect.width;
     //if player is not on board
-    if(xr<0||xr>(BOARD_WIDTH-wr))return FALSE;
-    if(yr<0||yr>(BOARD_HEIGHT-hr))return FALSE;
+    if(xr<0||xr>(BOARD_WIDTH*30-wr))return FALSE;
+    if(yr<0||yr>(BOARD_HEIGHT*30-hr))return FALSE;
     for(int i=0;i<game_object.obstacles_number;i++)
     {
-        xo = game_object.obstacles[i].cords.x;
-        yo = game_object.obstacles[i].cords.y;
-        wo = game_object.obstacles[i].width;
-        ho = game_object.obstacles[i].height;
+        xo = game_object.obstacles[i].cords.x*30;
+        yo = game_object.obstacles[i].cords.y*30;
+        wo = game_object.obstacles[i].width*30;
+        ho = game_object.obstacles[i].height*30;
         
         //if player is in obstacle area
         if(xr>(xo-wr)&&xr<(xo+wo)&&
