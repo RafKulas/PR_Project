@@ -32,11 +32,11 @@ void send_structure(int sock, game_object_t* pdata)
 
 	for (int i = 0; i < pdata->players_index; ++i)
 	{
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 0] = pdata->players[i].player_rect.cords.x;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 1] = pdata->players[i].player_rect.cords.y;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2] = pdata->players[i].player_rect.width;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 3] = pdata->players[i].player_rect.height;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4] = pdata->players[i].vel;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 0] = (int)pdata->players[i].player_rect.cords.x;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 1] = (int)pdata->players[i].player_rect.cords.y;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2] = (int)pdata->players[i].player_rect.width;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 3] = (int)pdata->players[i].player_rect.height;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4] = (int)pdata->players[i].vel;
 	}
 
 	debug_printf(pdata);
