@@ -8,7 +8,7 @@ void make_move(player_t** player, move_t move);
 
 void init_game(int max_client_number);
 
-bool_t check_obstacles(rect_t_player rect);
+bool_t check_if_in_field(rect_t_player rect, rect_t* fields, char fields_size);
 
 int check_game_result(player_t** player);
 

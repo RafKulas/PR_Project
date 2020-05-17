@@ -42,6 +42,7 @@ struct player_t
 {
 	rect_t_player player_rect;
     char vel;
+    char id;
 };
 
 //DEPEND ON CLIENT PREFERENCES
@@ -63,6 +64,9 @@ struct game_object_t
     player_t* players;
     bool_t win_allowed;
     char board_width,board_height; //not point to make things simple
+    char ID;
+    char speed_spots_number;
+    rect_t* speed_spots;
 };
 
 #endif //MAIN_GAME_STRUCTURE_H
