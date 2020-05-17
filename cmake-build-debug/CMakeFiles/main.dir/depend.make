@@ -59,7 +59,6 @@ CMakeFiles/main.dir/main.c.o: ../connection.h
 CMakeFiles/main.dir/main.c.o: ../game_structure.h
 CMakeFiles/main.dir/main.c.o: ../graphics.h
 CMakeFiles/main.dir/main.c.o: ../main.c
-CMakeFiles/main.dir/main.c.o: ../map.h
 CMakeFiles/main.dir/main.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL.h
 CMakeFiles/main.dir/main.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL_assert.h
 CMakeFiles/main.dir/main.c.o: /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL_atomic.h

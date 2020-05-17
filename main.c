@@ -4,17 +4,17 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "graphics.h"
-#include "map.h"
+//#include "map.h"
 #include "game_structure.h"
 #include "connection.h"
 
 #define PORT 8080
 #define IP "153.19.216.3"
-
+//#define IP "127.0.0.1"
 int running = 1;
 move_t direction = STOP;
 game_object *game;
-char buff[1];
+char buff[8];
 
 pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -24,7 +24,7 @@ void *keySender(void* add_sock){
         if(direction!=STOP) {
             printf("ide, bo %d\n", direction);
             buff[0] = direction;
-            send(sock, (char*)buff, 1, 0);
+            send(sock, (char*)buff, 8 * sizeof(char), 0);
             if(direction == END) {
                 printf("Wyslalem wyjscie\n");
                 running = 0;

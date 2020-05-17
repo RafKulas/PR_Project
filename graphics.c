@@ -10,7 +10,7 @@ int initWindow() {
                                           SDL_WINDOWPOS_CENTERED,
                                           BOARD_WIDTH,
                                           BOARD_HEIGHT,
-                              SDL_WINDOW_BORDERLESS);
+                              0);//SDL_WINDOW_BORDERLESS);
     RENDERER = NULL;
     if(!WINDOW)
     {

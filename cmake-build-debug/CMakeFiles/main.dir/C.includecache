@@ -6,47 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/Users/RafalPC/PR_Project/connection.h
-game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
-sys/types.h
--
-sys/socket.h
--
 
-/Users/RafalPC/PR_Project/game_structure.h
+/Users/RafalPC/PR_Project/graphics.c
+graphics.h
+/Users/RafalPC/PR_Project/graphics.h
 
 /Users/RafalPC/PR_Project/graphics.h
 SDL.h
 -
 game_structure.h
 /Users/RafalPC/PR_Project/game_structure.h
-
-/Users/RafalPC/PR_Project/main.c
-SDL.h
--
-sys/socket.h
--
-pthread.h
--
-netinet/in.h
--
-arpa/inet.h
--
-graphics.h
-/Users/RafalPC/PR_Project/graphics.h
-map.h
-/Users/RafalPC/PR_Project/map.h
-game_structure.h
-/Users/RafalPC/PR_Project/game_structure.h
-connection.h
-/Users/RafalPC/PR_Project/connection.h
-
-/Users/RafalPC/PR_Project/map.h
-game_structure.h
-/Users/RafalPC/PR_Project/game_structure.h
-graphics.h
-/Users/RafalPC/PR_Project/graphics.h
 
 /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL.h
 SDL_main.h
