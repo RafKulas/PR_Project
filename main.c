@@ -9,12 +9,17 @@
 #include "connection.h"
 
 #define PORT 8080
-#define IP "153.19.216.3"
 //#define IP "127.0.0.1"
+#define IP "153.19.216.3"
+
+#define rect rect_t
+#define player player_t
+#define game_object game_object_t
+
 int running = 1;
 move_t direction = STOP;
 game_object *game;
-char buff[8];
+char buff[1];
 
 pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -24,7 +29,7 @@ void *keySender(void* add_sock){
         if(direction!=STOP) {
             printf("ide, bo %d\n", direction);
             buff[0] = direction;
-            send(sock, (char*)buff, 8 * sizeof(char), 0);
+            send(sock, (char*)buff, 1, 0);
             if(direction == END) {
                 printf("Wyslalem wyjscie\n");
                 running = 0;
@@ -101,6 +106,8 @@ int main()
     colour backColor = BACKGROUND_COLOUR;
     initWindow();
 
+    recv_init_structure(sock, game);
+
     pthread_t ks, mr;
     pthread_create(&ks, NULL, keySender, &sock);
     pthread_create(&mr, NULL, mapReceiver, &sock);
@@ -130,7 +137,7 @@ int main()
 
         //pthread_mutex_lock(&map_mutex);
         drawObstacles(game->obstacles, game->obstacles_number);
-        drawPlayers(game->players, game->players_amount);
+        drawPlayers(game->players, game->players_index);
         //pthread_mutex_unlock(&map_mutex);
 
 

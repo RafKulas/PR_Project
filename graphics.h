@@ -20,6 +20,10 @@
 #define OBSTACLE_COLOUR BLACK
 #define BACKGROUND_COLOUR WHITE
 
+#define rect rect_t
+#define player player_t
+#define game_object game_object_t
+
 typedef struct
 {
     int r;

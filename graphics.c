@@ -3,13 +3,15 @@
 //
 
 #include "graphics.h"
+#define rect rect_t
+#define player player_t
 
 int initWindow() {
     WINDOW = SDL_CreateWindow("PR Project Client",
-                                          SDL_WINDOWPOS_CENTERED,
-                                          SDL_WINDOWPOS_CENTERED,
-                                          BOARD_WIDTH,
-                                          BOARD_HEIGHT,
+                              SDL_WINDOWPOS_CENTERED,
+                              SDL_WINDOWPOS_CENTERED,
+                              BOARD_WIDTH,
+                              BOARD_HEIGHT,
                               0);//SDL_WINDOW_BORDERLESS);
     RENDERER = NULL;
     if(!WINDOW)
@@ -27,10 +29,10 @@ void colourBackground(colour color) {
 }
 
 void drawRect(rect toDraw, colour color) {
-    RECT.x = toDraw.cords.x;
-    RECT.y = toDraw.cords.y;
-    RECT.h = toDraw.height;
-    RECT.w = toDraw.width;
+    RECT.x = toDraw.cords.x * 30;
+    RECT.y = toDraw.cords.y * 30;
+    RECT.h = toDraw.height * 30;
+    RECT.w = toDraw.width * 30;
     SDL_SetRenderDrawColor(RENDERER, color.r, color.g, color.b, color.a);
     SDL_RenderFillRect(RENDERER, &RECT);
 }
@@ -52,9 +54,26 @@ void drawObstacles(rect* obstacles, int no_obs) {
     }
 }
 
-void drawPlayer(player p, colour c) {
-    drawRect(p.player_rect, c);
+void drawRectPlayer(rect_t_player toDraw, colour color)
+{
+    RECT.x = toDraw.cords.x;
+    RECT.y = toDraw.cords.y;
+    RECT.h = toDraw.height;
+    RECT.w = toDraw.width;
+    SDL_SetRenderDrawColor(RENDERER, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(RENDERER, &RECT);
 }
+
+void drawPlayer(player p, colour c) {
+    RECT.x = p.player_rect.cords.x;
+    RECT.y = p.player_rect.cords.y;
+    RECT.h = p.player_rect.height;
+    RECT.w = p.player_rect.width;
+    SDL_SetRenderDrawColor(RENDERER, c.r, c.g, c.b, c.a);
+    SDL_RenderFillRect(RENDERER, &RECT);
+}
+
+
 
 void drawPlayers(player* pl, int player_amount) {
     for(int i = 0; i<player_amount; i++) {
