@@ -7,14 +7,7 @@ typedef struct rect_t rect_t;
 typedef struct pair_t_player pair_t_player;
 typedef struct rect_t_player rect_t_player;
 typedef enum move_t move_t;
-typedef enum bool_t bool_t;
 typedef struct game_object_t game_object_t;
-
-enum bool_t
-{
-	FALSE,
-	TRUE,
-};
 
 struct pair_t
 {

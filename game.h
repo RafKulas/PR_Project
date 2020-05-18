@@ -1,5 +1,13 @@
 #include "game_structure.h"
 
+typedef enum bool_t bool_t;
+
+enum bool_t
+{
+	FALSE,
+	TRUE,
+};
+
 void init_player(player_t** player);
 
 void remove_player(player_t** player);
