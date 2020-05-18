@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define OBSTACLES_NUMBER 19
-#define SPEED_SPOTS_NUMBER 2 // ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_NUMBER 1 // ??? TO CHANGE BY BOARD DESIGNER
 #define SPEED_SPOTS_BONUS 2 // mutliply player vel by this bonus ??? TO CHANGE BY BOARD DESIGNER
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
@@ -52,8 +52,7 @@ rect_t obs[19] = {
         {{21, 1},  2,  2}
 };
 
-rect_t ss[2] = {
-        {{2,   2}, 3, 3},
+rect_t ss[1] = {
         {{28,   12}, 3, 3}
 };
 
