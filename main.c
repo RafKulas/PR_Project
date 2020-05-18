@@ -10,7 +10,7 @@
 #define PORT 8080
 //#define IP "127.0.0.1"
 #define IP "153.19.216.3"
-#define ID game1->ID
+#define _ID game1->ID
 
 #define rect rect_t
 #define player player_t
@@ -27,6 +27,12 @@ game_object *game1, *game2;
 char buff[1];
 
 pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void swap(void* one, void* two) {
+    void* temp = one;
+    one = two;
+    two = temp;
+}
 
 void *keySender(void* add_sock){
     int sock = *(int*)add_sock;
@@ -46,8 +52,9 @@ void *keySender(void* add_sock){
 void *mapReceiver(void* add_sock) {
     int sock = *(int*)add_sock;
     while(running) {
-        //pthread_mutex_lock(&map_mutex);
         recv_structure(sock, game1);
+        //pthread_mutex_lock(&map_mutex);
+        swap(game1, game2);
         //pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
@@ -114,7 +121,22 @@ int main()
     colour backColor = BACKGROUND_COLOUR;
     initWindow();
 
-    recv_init_structure(sock, game1);
+    recv_init_structure(sock, game2);
+    game1->ID = game2->ID;
+    game1->obstacles_number = game2->obstacles_number;
+    for(int i = 0; i<game1->obstacles_number; ++i) {
+        game1->obstacles[i].cords.x = game2->obstacles[i].cords.x;
+        game1->obstacles[i].cords.y = game2->obstacles[i].cords.y;
+        game1->obstacles[i].width   = game2->obstacles[i].width;
+        game1->obstacles[i].height  = game2->obstacles[i].height;
+    }
+    game1->speed_spots_number = game2->speed_spots_number;
+    for(int i = 0; i<game1->speed_spots_number; ++i) {
+        game1->speed_spots[i].cords.x = game2->speed_spots[i].cords.x;
+        game1->speed_spots[i].cords.y = game2->speed_spots[i].cords.y;
+        game1->speed_spots[i].width   = game2->speed_spots[i].width;
+        game1->speed_spots[i].height  = game2->speed_spots[i].height;
+    }
 
     pthread_t ks, mr;
     pthread_create(&ks, NULL, keySender, &sock);
@@ -126,23 +148,23 @@ int main()
         SDL_Event e;
         while(SDL_PollEvent(&e) > 0)
         {
-            for(int i = 0; i<game1->players_index; i++) {
-                if (game1->players[i].id == ID) {
-                    if(game1->players[i].player_rect.game_result==LOSE) {
+            for(int i = 0; i<game2->players_index; i++) {
+                if (game2->players[i].id == _ID) {
+                    if(game2->players[i].player_rect.game_result==LOSE) {
                         //TODO
                         direction = END;
                         printf("\nPrzegrales :(\n");
                         SDL_Delay(1000);
 
                     }
-                    else if(game1->players[i].player_rect.game_result==WIN) {
+                    else if(game2->players[i].player_rect.game_result==WIN) {
                         //TODO
                         direction = END;
                         printf("\nWygrales :)\n");
                         SDL_Delay(1000);
                     }
                     else {
-                        i = game1->players_index;
+                        i = game2->players_index;
                     }
                 }
             }
@@ -162,10 +184,10 @@ int main()
         }
         colourBackground(backColor);
 
-        drawObstacles(game1->obstacles, game1->obstacles_number);
-        drawSpeedSpots(game1->speed_spots, game1->speed_spots_number);
+        drawObstacles(game2->obstacles, game2->obstacles_number);
+        drawSpeedSpots(game2->speed_spots, game2->speed_spots_number);
         pthread_mutex_lock(&map_mutex);
-        drawPlayers(game1->players, game1->players_index);
+        drawPlayers(game2->players, game2->players_index);
         pthread_mutex_unlock(&map_mutex);
 
         updateScreen();
