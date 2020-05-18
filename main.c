@@ -156,7 +156,7 @@ int main()
                         pthread_cancel(mr);
                         running = 0;
                         printf("\nPrzegrales :(\n");
-                        SDL_Delay(1000);
+                        return 0;
 
                     }
                     else if(game2->players[i].player_rect.game_result==WIN) {
@@ -165,7 +165,8 @@ int main()
                         pthread_cancel(mr);
                         running = 0;
                         printf("\nWygrales :)\n");
-                        SDL_Delay(1000);
+                        return 0;
+
                     }
                     else {
                         i = game2->players_index;
