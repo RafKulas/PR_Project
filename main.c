@@ -53,9 +53,9 @@ void *mapReceiver(void* add_sock) {
     int sock = *(int*)add_sock;
     while(running) {
         recv_structure(sock, game1);
-        //pthread_mutex_lock(&map_mutex);
+        pthread_mutex_lock(&map_mutex);
         swap(&game1, &game2);
-        //pthread_mutex_unlock(&map_mutex);
+        pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
 }
@@ -193,7 +193,7 @@ int main()
         updateScreen();
     }
     quitSDL();
-    pthread_join(ks, NULL);
+    pthread_cancel(ks);
 
     return EXIT_SUCCESS;
 }
