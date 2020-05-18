@@ -4,7 +4,10 @@
 
 #define OBSTACLES_NUMBER 19
 #define SPEED_SPOTS_NUMBER 2 // ??? TO CHANGE BY BOARD DESIGNER
-#define SPEED_SPOTS_BONUS 2 // mutliply player vel by this bonus ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_BONUS 1 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
+#define MAX_SPEED 10 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce ??? TO CHANGE BY BOARD DESIGNER
+
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
 #define PLAYER_RECT_SIZE 10 
@@ -50,6 +53,12 @@ rect_t obs[19] = {
         {{5, 11}, 2,  2},
         {{13, 1},  2,  2},
         {{21, 1},  2,  2}
+};
+
+rect_t spd[2] =
+{
+    {{50,   50}, 10, 10},
+    {{100,   100}, 10, 10},
 };
 
 
@@ -195,8 +204,11 @@ void make_move(player_t** player, move_t move)
     }
     (*player)->player_rect.cords.x = max_cords.x;
     (*player)->player_rect.cords.y = max_cords.y;
-    if(check_if_in_field((*player)->player_rect, game_object.speed_spots, game_object.speed_spots_number) == TRUE)
-        (*player)->vel*=SPEED_SPOTS_BONUS;
+    if((*player)->vel > START_VEL) (*player)->vel-=SPEED_REDUCE;
+    if(check_if_in_field((*player)->player_rect, game_object.speed_spots, game_object.speed_spots_number) == TRUE
+    &&(*player)->vel < MAX_SPEED)
+        (*player)->vel+=SPEED_SPOTS_BONUS;
+    
     (*player)->player_rect.game_result = check_game_result(player);
     return;
     
@@ -218,12 +230,7 @@ void init_game(int max_client_number)
 
     game_object.obstacles = (rect_t*)obs;
 
-    /*
-    
-        TODO:
-        SET SPEED SPOTS
-
-    */
+    game_object.speed_spots = (rect_t*)spd;
 
    for(int i=0;i<max_client_number;i++)
    {
