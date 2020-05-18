@@ -16,6 +16,10 @@ sys/socket.h
 
 /Users/RafalPC/PR_Project/game_structure.h
 
+/Users/RafalPC/PR_Project/graphics.c
+graphics.h
+/Users/RafalPC/PR_Project/graphics.h
+
 /Users/RafalPC/PR_Project/graphics.h
 SDL.h
 -

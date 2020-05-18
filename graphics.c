@@ -54,29 +54,24 @@ void drawObstacles(rect* obstacles, int no_obs) {
     }
 }
 
-void drawRectPlayer(rect_t_player toDraw, colour color)
-{
-    RECT.x = toDraw.cords.x;
-    RECT.y = toDraw.cords.y;
-    RECT.h = toDraw.height;
-    RECT.w = toDraw.width;
-    SDL_SetRenderDrawColor(RENDERER, color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(RENDERER, &RECT);
+void drawSpeedSpots(rect* speed_spots, int speed_spots_no) {
+    colour ss_col = SPEED_SPOT_COLOUR;
+    for(int i=0; i< speed_spots_no; i++) {
+        drawRect(speed_spots[i], ss_col);
+    }
 }
 
 void drawPlayer(player p, colour c) {
     RECT.x = p.player_rect.cords.x;
     RECT.y = p.player_rect.cords.y;
-    RECT.h = p.player_rect.height;
-    RECT.w = p.player_rect.width;
+    RECT.h = p.player_rect.size;
+    RECT.w = p.player_rect.size;
     SDL_SetRenderDrawColor(RENDERER, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(RENDERER, &RECT);
 }
 
-
-
 void drawPlayers(player* pl, int player_amount) {
     for(int i = 0; i<player_amount; i++) {
-        drawPlayer(pl[i], (colour){(100*i)%256, (99*i+60)%256, (i*30+100)%256, 255});
+        drawPlayer(pl[i], (colour){(100*i)%256, (90*i+60)%256, (i*30+100)%256, 255});
     }
 }

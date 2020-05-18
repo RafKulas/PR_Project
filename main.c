@@ -4,17 +4,22 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "graphics.h"
-//#include "map.h"
 #include "game_structure.h"
 #include "connection.h"
 
 #define PORT 8080
 //#define IP "127.0.0.1"
 #define IP "153.19.216.3"
+#define ID game->ID
 
 #define rect rect_t
 #define player player_t
 #define game_object game_object_t
+
+#define WIN 1
+#define LOSE 2
+#define PLAY 3
+#define NOT_PLAY 4
 
 int running = 1;
 move_t direction = STOP;
@@ -31,10 +36,8 @@ void *keySender(void* add_sock){
             buff[0] = direction;
             send(sock, (char*)buff, 1, 0);
             if(direction == END) {
-                printf("Wyslalem wyjscie\n");
                 running = 0;
             }
-            SDL_Delay(64);
         }
     }
     return  NULL;
@@ -74,6 +77,7 @@ int main()
     game = (game_object*)malloc(sizeof(game_object));
     game->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
     game->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
+    game->speed_spots = (rect*)malloc(sizeof(rect) * 10); // space for 10 speed spots
 
 
     /////////////socket
@@ -118,6 +122,26 @@ int main()
         SDL_Event e;
         while(SDL_PollEvent(&e) > 0)
         {
+            for(int i = 0; i<game->players_index; i++) {
+                if (game->players[i].id == ID) {
+                    if(game->players[i].player_rect.game_result==LOSE) {
+                        //TODO
+                        printf("\nPrzegrales :(\n");
+                        direction = END;
+                        SDL_Delay(1000);
+
+                    }
+                    else if(game->players[i].player_rect.game_result==WIN) {
+                        //TODO
+                        printf("\nWygrales :)\n");
+                        direction = END;
+                        SDL_Delay(1000);
+                    }
+                    else {
+                        i = game->players_index;
+                    }
+                }
+            }
             switch(e.type)
             {
                 case SDL_QUIT:
@@ -136,6 +160,7 @@ int main()
 
         //pthread_mutex_lock(&map_mutex);
         drawObstacles(game->obstacles, game->obstacles_number);
+        drawSpeedSpots(game->speed_spots, game->speed_spots_number);
         drawPlayers(game->players, game->players_index);
         //pthread_mutex_unlock(&map_mutex);
 
@@ -144,6 +169,5 @@ int main()
     quitSDL();
     pthread_join(ks, NULL);
 
-    printf("Koncze program");
     return EXIT_SUCCESS;
 }

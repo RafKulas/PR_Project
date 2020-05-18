@@ -15,10 +15,12 @@
 
 #define WHITE {255, 255, 255, 255}
 #define BLACK {0, 0, 0, 255}
-#define RED {255, 0, 0, 244}
+#define RED {255, 0, 0, 255}
+#define LIGHTBLUE {135, 206, 250, 255}
 #define PLAYER_COLOUR RED
 #define OBSTACLE_COLOUR BLACK
 #define BACKGROUND_COLOUR WHITE
+#define SPEED_SPOT_COLOUR LIGHTBLUE
 
 #define rect rect_t
 #define player player_t
@@ -44,6 +46,7 @@ void quitSDL();
 void drawObstacles(rect* obstacles, int no_obs);
 void drawPlayer(player p, colour c);
 void drawPlayers();
+void drawSpeedSpots(rect* speed_spots, int speed_spots_no);
 
 
 #endif //MAIN_GRAPHICS_H
