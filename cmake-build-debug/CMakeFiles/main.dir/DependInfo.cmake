@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/RafalPC/PR_Project/connection.c" "/Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles/main.dir/connection.c.o"
-  "/Users/RafalPC/PR_Project/graphics.c" "/Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles/main.dir/graphics.c.o"
-  "/Users/RafalPC/PR_Project/main.c" "/Users/RafalPC/PR_Project/cmake-build-debug/CMakeFiles/main.dir/main.c.o"
+  "/Users/RafalPC/CLionProjects/PR_Project/connection.c" "/Users/RafalPC/CLionProjects/PR_Project/cmake-build-debug/CMakeFiles/main.dir/connection.c.o"
+  "/Users/RafalPC/CLionProjects/PR_Project/graphics.c" "/Users/RafalPC/CLionProjects/PR_Project/cmake-build-debug/CMakeFiles/main.dir/graphics.c.o"
+  "/Users/RafalPC/CLionProjects/PR_Project/main.c" "/Users/RafalPC/CLionProjects/PR_Project/cmake-build-debug/CMakeFiles/main.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

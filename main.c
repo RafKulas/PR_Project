@@ -44,12 +44,13 @@ void *keySender(void* add_sock){
 }
 
 void *mapReceiver(void* add_sock) {
+    SDL_Delay(500);
     int sock = *(int*)add_sock;
     while(running) {
-        //pthread_mutex_lock(&map_mutex);
+        pthread_mutex_lock(&map_mutex);
 
         recv_structure(sock, game);
-        //pthread_mutex_unlock(&map_mutex);
+        pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
 }
@@ -158,11 +159,11 @@ int main()
         }
         colourBackground(backColor);
 
-        //pthread_mutex_lock(&map_mutex);
         drawObstacles(game->obstacles, game->obstacles_number);
         drawSpeedSpots(game->speed_spots, game->speed_spots_number);
+        pthread_mutex_lock(&map_mutex);
         drawPlayers(game->players, game->players_index);
-        //pthread_mutex_unlock(&map_mutex);
+        pthread_mutex_unlock(&map_mutex);
 
         updateScreen();
     }
