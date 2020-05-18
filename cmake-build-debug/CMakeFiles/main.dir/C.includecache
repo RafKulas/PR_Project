@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/RafalPC/CLionProjects/PR_Project/connection.c
-connection.h
-/Users/RafalPC/CLionProjects/PR_Project/connection.h
-stdlib.h
--
-stdio.h
--
-
 /Users/RafalPC/CLionProjects/PR_Project/connection.h
 game_structure.h
 /Users/RafalPC/CLionProjects/PR_Project/game_structure.h
@@ -23,10 +15,6 @@ sys/socket.h
 -
 
 /Users/RafalPC/CLionProjects/PR_Project/game_structure.h
-
-/Users/RafalPC/CLionProjects/PR_Project/graphics.c
-graphics.h
-/Users/RafalPC/CLionProjects/PR_Project/graphics.h
 
 /Users/RafalPC/CLionProjects/PR_Project/graphics.h
 SDL.h

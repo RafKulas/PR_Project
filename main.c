@@ -10,7 +10,7 @@
 #define PORT 8080
 //#define IP "127.0.0.1"
 #define IP "153.19.216.3"
-#define ID game->ID
+#define ID game1->ID
 
 #define rect rect_t
 #define player player_t
@@ -23,7 +23,7 @@
 
 int running = 1;
 move_t direction = STOP;
-game_object *game;
+game_object *game1, *game2;
 char buff[1];
 
 pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -44,13 +44,11 @@ void *keySender(void* add_sock){
 }
 
 void *mapReceiver(void* add_sock) {
-    SDL_Delay(500);
     int sock = *(int*)add_sock;
     while(running) {
-        pthread_mutex_lock(&map_mutex);
-
-        recv_structure(sock, game);
-        pthread_mutex_unlock(&map_mutex);
+        //pthread_mutex_lock(&map_mutex);
+        recv_structure(sock, game1);
+        //pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
 }
@@ -75,10 +73,15 @@ void keyHandler(SDL_KeyboardEvent *key){
 
 int main()
 {
-    game = (game_object*)malloc(sizeof(game_object));
-    game->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
-    game->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
-    game->speed_spots = (rect*)malloc(sizeof(rect) * 10); // space for 10 speed spots
+    game1 = (game_object*)malloc(sizeof(game_object));
+    game1->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
+    game1->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
+    game1->speed_spots = (rect*)malloc(sizeof(rect) * 10); // space for 10 speed spots
+
+    game2 = (game_object*)malloc(sizeof(game_object));
+    game2->obstacles = (rect*)malloc(sizeof(rect) * 100); // space for 100 obstacles
+    game2->players = (player*)malloc(sizeof(player) * 20); // space for 20 players
+    game2->speed_spots = (rect*)malloc(sizeof(rect) * 10); // space for 10 speed spots
 
 
     /////////////socket
@@ -111,7 +114,7 @@ int main()
     colour backColor = BACKGROUND_COLOUR;
     initWindow();
 
-    recv_init_structure(sock, game);
+    recv_init_structure(sock, game1);
 
     pthread_t ks, mr;
     pthread_create(&ks, NULL, keySender, &sock);
@@ -123,23 +126,23 @@ int main()
         SDL_Event e;
         while(SDL_PollEvent(&e) > 0)
         {
-            for(int i = 0; i<game->players_index; i++) {
-                if (game->players[i].id == ID) {
-                    if(game->players[i].player_rect.game_result==LOSE) {
+            for(int i = 0; i<game1->players_index; i++) {
+                if (game1->players[i].id == ID) {
+                    if(game1->players[i].player_rect.game_result==LOSE) {
                         //TODO
                         direction = END;
                         printf("\nPrzegrales :(\n");
                         SDL_Delay(1000);
 
                     }
-                    else if(game->players[i].player_rect.game_result==WIN) {
+                    else if(game1->players[i].player_rect.game_result==WIN) {
                         //TODO
                         direction = END;
                         printf("\nWygrales :)\n");
                         SDL_Delay(1000);
                     }
                     else {
-                        i = game->players_index;
+                        i = game1->players_index;
                     }
                 }
             }
@@ -159,10 +162,10 @@ int main()
         }
         colourBackground(backColor);
 
-        drawObstacles(game->obstacles, game->obstacles_number);
-        drawSpeedSpots(game->speed_spots, game->speed_spots_number);
+        drawObstacles(game1->obstacles, game1->obstacles_number);
+        drawSpeedSpots(game1->speed_spots, game1->speed_spots_number);
         pthread_mutex_lock(&map_mutex);
-        drawPlayers(game->players, game->players_index);
+        drawPlayers(game1->players, game1->players_index);
         pthread_mutex_unlock(&map_mutex);
 
         updateScreen();
