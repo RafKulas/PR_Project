@@ -10,7 +10,7 @@
 
 #define SCORE_SPOTS_NUMBER 6 // ??? TO CHANGE BY GAME DESIGNER
 
-#define WIN_ADVANTAGE 4
+#define WIN_ADVANTAGE 3
 
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
