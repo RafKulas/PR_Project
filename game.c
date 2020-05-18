@@ -4,9 +4,11 @@
 
 #define OBSTACLES_NUMBER 19
 #define SPEED_SPOTS_NUMBER 1
-#define SPEED_SPOTS_BONUS 5 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
-#define MAX_SPEED 15 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
-#define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_BONUS 5 // add bonus to player vel 
+#define MAX_SPEED 15 // maximum speed of player 
+#define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce 
+
+#define SCORE_SPOTS_NUMBER 6 // ??? TO CHANGE BY GAME DESIGNER
 
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
@@ -59,6 +61,9 @@ rect_t ss[1] = {
         {{28,   12}, 3, 3}
 };
 
+player_score_t* player_score;
+rect_t* score_spots;
+
 
 
 void init_player(player_t** player)
@@ -74,6 +79,9 @@ void init_player(player_t** player)
 
     game_object.ID++;
     (*player)->id = game_object.ID;
+
+    player_score[game_object.players_index].pplayer = (*player);
+    player_score[game_object.players_index].score = 0;
 
     if(game_object.players_index==1)win_allowed = TRUE;
     game_object.players_index++;
@@ -208,6 +216,8 @@ void make_move(player_t** player, move_t move)
     &&(*player)->vel < MAX_SPEED)
         (*player)->vel+=SPEED_SPOTS_BONUS;
     
+    
+
     (*player)->player_rect.game_result = check_game_result(player);
     return;
     
@@ -216,6 +226,7 @@ void make_move(player_t** player, move_t move)
 void init_game(int max_client_number)
 {
     game_object.players = (player_t*)malloc(sizeof(player_t)*max_client_number);
+    player_score = (player_score_t*)malloc(sizeof(player_score_t)*max_client_number);
     
     //to make sending easier
     game_object.obstacles_number = OBSTACLES_NUMBER;
@@ -228,9 +239,14 @@ void init_game(int max_client_number)
     game_object.ID = 0;
 
     game_object.obstacles = (rect_t*)obs;
-    game_object.speed_spots = (rect_t*)ss;
 
     game_object.speed_spots = (rect_t*)ss;
+
+    /*
+    
+        TODO: SET SCORE SPOTS
+
+    */
 
    for(int i=0;i<max_client_number;i++)
    {
@@ -240,6 +256,37 @@ void init_game(int max_client_number)
        game_object.players[i].player_rect.cords.x = BANNED_X;
        game_object.players[i].player_rect.cords.y = BANNED_Y;
    }
+}
+
+void check_score_spots(player_t* player)
+{
+    int xr,yr,sr;
+    int score, index;
+    int xs,ys,ws,hs;
+    xr = player->player_rect.cords.x;
+    yr = player->player_rect.cords.y;
+    sr = player->player_rect.size;
+
+    for(int i=0;i<game_object.players_index;i++)
+    {
+        if(player == player_score[i].pplayer)
+        {
+            score = player_score[i].score;
+            index = i;
+            break;
+        }
+    }
+    /*
+    xs = score[index].cords
+    ys = fields[i].cords.y*SCALE;
+    ws = fields[i].width*SCALE;
+    hs = fields[i].height*SCALE;
+        
+        //if player is in obstacle area
+        if(xr>(xf-sr)&&xr<(xf+wf)&&
+            yr>(yf-sr)&&yr<(yf+hf))return TRUE;
+    
+    return FALSE;*/
 }
 
 void send_s(int socket)
