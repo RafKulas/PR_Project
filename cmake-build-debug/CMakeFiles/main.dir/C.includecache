@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/RafalPC/CLionProjects/PR_Project2/connection.c
-connection.h
-/Users/RafalPC/CLionProjects/PR_Project2/connection.h
-stdlib.h
--
-stdio.h
--
-
-/Users/RafalPC/CLionProjects/PR_Project2/connection.h
-game_structure.h
-/Users/RafalPC/CLionProjects/PR_Project2/game_structure.h
-sys/types.h
--
-sys/socket.h
--
-
 /Users/RafalPC/CLionProjects/PR_Project2/game_structure.h
 
 /Users/RafalPC/CLionProjects/PR_Project2/graphics.c
@@ -33,24 +17,6 @@ SDL.h
 -
 game_structure.h
 /Users/RafalPC/CLionProjects/PR_Project2/game_structure.h
-
-/Users/RafalPC/CLionProjects/PR_Project2/main.c
-SDL.h
--
-sys/socket.h
--
-pthread.h
--
-netinet/in.h
--
-arpa/inet.h
--
-graphics.h
-/Users/RafalPC/CLionProjects/PR_Project2/graphics.h
-game_structure.h
-/Users/RafalPC/CLionProjects/PR_Project2/game_structure.h
-connection.h
-/Users/RafalPC/CLionProjects/PR_Project2/connection.h
 
 /usr/local/Cellar/sdl2/2.0.12_1/include/SDL2/SDL.h
 SDL_main.h
