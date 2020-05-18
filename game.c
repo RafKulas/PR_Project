@@ -4,8 +4,8 @@
 
 #define OBSTACLES_NUMBER 19
 #define SPEED_SPOTS_NUMBER 1
-#define SPEED_SPOTS_BONUS 3 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
-#define MAX_SPEED 10 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_BONUS 5 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
+#define MAX_SPEED 15 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
 #define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce ??? TO CHANGE BY BOARD DESIGNER
 
 #define BOARD_WIDTH     32
@@ -21,7 +21,7 @@
 #define START_Y 50 
 
 //initial vel of player
-#define START_VEL 4 
+#define START_VEL 5 
 
 #define WIN 1
 #define LOSE 2
@@ -152,8 +152,8 @@ int check_game_result(player_t** player)
         }
     }
 
-    if(max_dx>BOARD_WIDTH*SCALE)return LOSE;
-    if(max_dy>BOARD_HEIGHT*SCALE)return LOSE;
+    if(max_dx>BOARD_WIDTH*SCALE/2)return LOSE;
+    if(max_dy>BOARD_HEIGHT*SCALE/2)return LOSE;
 
     return PLAY;
 }
