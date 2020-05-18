@@ -53,6 +53,10 @@ pthread_mutex_t clients_array_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t moves_queue_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t condition_variable = PTHREAD_COND_INITIALIZER;
 
+void* to_exit(void* d) {
+    scanf(" ");
+    exit(1);
+}
 
 
 int main()
@@ -93,8 +97,9 @@ int main()
         return 1;
     }
 
-    pthread_t thread_id;
+    pthread_t thread_id, exiting;
     pthread_create(&thread_id, NULL, moves_handler, NULL);
+    pthread_create(&exiting, NULL, to_exit, NULL);
 
 	for (;;) 
     {
