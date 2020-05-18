@@ -153,6 +153,7 @@ int main()
                     if(game2->players[i].player_rect.game_result==LOSE) {
                         //TODO
                         direction = END;
+                        pthread_cancel(mr);
                         printf("\nPrzegrales :(\n");
                         SDL_Delay(1000);
 
@@ -160,6 +161,7 @@ int main()
                     else if(game2->players[i].player_rect.game_result==WIN) {
                         //TODO
                         direction = END;
+                        pthread_cancel(mr);
                         printf("\nWygrales :)\n");
                         SDL_Delay(1000);
                     }
