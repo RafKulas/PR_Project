@@ -72,6 +72,6 @@ void drawPlayer(player p, colour c) {
 
 void drawPlayers(player* pl, int player_amount) {
     for(int i = 0; i<player_amount; i++) {
-        drawPlayer(pl[i], (colour){(100*i)%256, (90*i+60)%256, (i*30+100)%256, 255});
+        drawPlayer(pl[i], (colour){(100*pl[i].id)%256, (90*pl[i].id+60)%256, (pl[i].id*30+100)%256, 255});
     }
 }
