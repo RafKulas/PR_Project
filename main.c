@@ -32,12 +32,12 @@ void *keySender(void* add_sock){
     int sock = *(int*)add_sock;
     while(running) {
         if(direction!=STOP) {
-            printf("ide, bo %d\n", direction);
             buff[0] = direction;
             send(sock, (char*)buff, 1, 0);
             if(direction == END) {
                 running = 0;
             }
+            SDL_Delay(100);
         }
     }
     return  NULL;
@@ -126,15 +126,15 @@ int main()
                 if (game->players[i].id == ID) {
                     if(game->players[i].player_rect.game_result==LOSE) {
                         //TODO
-                        printf("\nPrzegrales :(\n");
                         direction = END;
+                        printf("\nPrzegrales :(\n");
                         SDL_Delay(1000);
 
                     }
                     else if(game->players[i].player_rect.game_result==WIN) {
                         //TODO
-                        printf("\nWygrales :)\n");
                         direction = END;
+                        printf("\nWygrales :)\n");
                         SDL_Delay(1000);
                     }
                     else {

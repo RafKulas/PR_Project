@@ -86,6 +86,8 @@ void recv_init_structure(int sock, game_object_t* pdata)
 
     pdata->board_width = buffer[1 + 1 + RECT_SIZE * buffer[1] + 1 + RECT_SIZE * buffer[1 + 1 + RECT_SIZE * buffer[1]] + 1];
     pdata->board_height = buffer[1 + 1 + RECT_SIZE * buffer[1] + 1 + RECT_SIZE * buffer[1 + 1 + RECT_SIZE * buffer[1]] + 1 + 1];
+    debug_printf(pdata);
+
 }
 
 void recv_structure(int sock, game_object_t* pdata)
@@ -104,31 +106,31 @@ void recv_structure(int sock, game_object_t* pdata)
         pdata->players[i].id = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2];
         pdata->players[i].vel = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2 + 1];
     }
-
+    debug_printf(pdata);
 }
 
 void debug_printf(game_object_t* data)
 {
-    printf("data.obstacles_number = %d\n", data->obstacles_number);
-    for (int i = 0; i < data->obstacles_number; ++i)
-    {
-        printf("i = %d\n", i);
-        printf("data.obstacles[i].cords.x = %d\n", data->obstacles[i].cords.x);
-        printf("data.obstacles[i].cords.y = %d\n", data->obstacles[i].cords.y);
-        printf("data.obstacles[i].width = %d\n", data->obstacles[i].width);
-        printf("data.obstacles[i].height = %d\n", data->obstacles[i].height);
-    }
-    printf("data.obstacles_number = %d\n", data->obstacles_number);
-    for (int i = 0; i < data->speed_spots_number; ++i)
-    {
-        printf("i = %d\n", i);
-        printf("data.speed_spots[i].cords.x = %d\n", data->speed_spots[i].cords.x);
-        printf("data.speed_spots[i].cords.y = %d\n", data->speed_spots[i].cords.y);
-        printf("data.speed_spots[i].width = %d\n", data->speed_spots[i].width);
-        printf("data.speed_spots[i].height = %d\n", data->speed_spots[i].height);
-    }
-    printf("data.board_width = %d\n", data->board_width);
-    printf("data.board_height = %d\n", data->board_height);
+//    printf("data.obstacles_number = %d\n", data->obstacles_number);
+//    for (int i = 0; i < data->obstacles_number; ++i)
+//    {
+//        printf("i = %d\n", i);
+//        printf("data.obstacles[i].cords.x = %d\n", data->obstacles[i].cords.x);
+//        printf("data.obstacles[i].cords.y = %d\n", data->obstacles[i].cords.y);
+//        printf("data.obstacles[i].width = %d\n", data->obstacles[i].width);
+//        printf("data.obstacles[i].height = %d\n", data->obstacles[i].height);
+//    }
+//    printf("data.obstacles_number = %d\n", data->obstacles_number);
+//    for (int i = 0; i < data->speed_spots_number; ++i)
+//    {
+//        printf("i = %d\n", i);
+//        printf("data.speed_spots[i].cords.x = %d\n", data->speed_spots[i].cords.x);
+//        printf("data.speed_spots[i].cords.y = %d\n", data->speed_spots[i].cords.y);
+//        printf("data.speed_spots[i].width = %d\n", data->speed_spots[i].width);
+//        printf("data.speed_spots[i].height = %d\n", data->speed_spots[i].height);
+//    }
+//    printf("data.board_width = %d\n", data->board_width);
+//    printf("data.board_height = %d\n", data->board_height);
     printf("data.players_index =  %d\n", data->players_index);
     for (int i = 0; i < data->players_index; ++i)
     {
