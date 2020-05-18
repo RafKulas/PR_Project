@@ -14,7 +14,7 @@
 
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
-#define PLAYER_RECT_SIZE 10 
+#define PLAYER_RECT_SIZE 20 
 
 //cords for player out of the board, for example before starting or after finishing
 #define BANNED_X -10 
