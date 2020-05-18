@@ -52,6 +52,12 @@ rect_t obs[19] = {
         {{21, 1},  2,  2}
 };
 
+rect_t ss[2] = {
+        {{2,   2}, 3, 3},
+        {{28,   12}, 3, 3}
+};
+
+
 
 void init_player(player_t** player)
 {
@@ -217,6 +223,7 @@ void init_game(int max_client_number)
     game_object.ID = 0;
 
     game_object.obstacles = (rect_t*)obs;
+    game_object.speed_spots = (rect_t*)ss;
 
     /*
     
