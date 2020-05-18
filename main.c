@@ -28,10 +28,10 @@ char buff[1];
 
 pthread_mutex_t map_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void swap(void* one, void* two) {
-    void* temp = one;
-    one = two;
-    two = temp;
+void swap(void** one, void** two) {
+    void* temp = *one;
+    *one = *two;
+    *two = temp;
 }
 
 void *keySender(void* add_sock){
@@ -54,7 +54,7 @@ void *mapReceiver(void* add_sock) {
     while(running) {
         recv_structure(sock, game1);
         //pthread_mutex_lock(&map_mutex);
-        swap(game1, game2);
+        swap(&game1, &game2);
         //pthread_mutex_unlock(&map_mutex);
     }
     return  NULL;
