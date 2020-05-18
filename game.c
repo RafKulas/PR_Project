@@ -71,11 +71,11 @@ rect_t ss[SPEED_SPOTS_NUMBER] = {
 
 rect_t score_spots[SCORE_SPOTS_NUMBER] = {
         {{9, 1}, 2, 2},
+        {{9, 3}, 2, 2},
         {{25, 1}, 2, 2},
         {{27, 7}, 2, 2},
         {{23, 11}, 2, 2},
-        {{11, 11}, 2, 2},
-        {{9, 3}, 2, 2}
+        {{11, 11}, 2, 2}
 };
 
 player_score_t* player_score;
