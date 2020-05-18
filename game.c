@@ -3,12 +3,14 @@
 #include <stdlib.h>
 
 #define OBSTACLES_NUMBER 19
-#define SPEED_SPOTS_NUMBER 1
+#define SPEED_SPOTS_NUMBER 7
 #define SPEED_SPOTS_BONUS 5 // add bonus to player vel 
 #define MAX_SPEED 15 // maximum speed of player 
 #define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce 
 
 #define SCORE_SPOTS_NUMBER 6 // ??? TO CHANGE BY GAME DESIGNER
+
+#define WIN_ADVANTAGE 3
 
 #define BOARD_WIDTH     32
 #define BOARD_HEIGHT    16
@@ -77,7 +79,6 @@ rect_t score_spots[SCORE_SPOTS_NUMBER] = {
 };
 
 player_score_t* player_score;
-rect_t* score_spots;
 
 
 
@@ -116,6 +117,37 @@ int find_player_index(player_t** player)
     return -1;
 }
 
+void check_score_spots(player_t* player)
+{
+    int xr,yr,sr;
+    int score, index=0;
+    int xs,ys,ws,hs;
+    xr = player->player_rect.cords.x;
+    yr = player->player_rect.cords.y;
+    sr = player->player_rect.size;
+
+    for(int i=0;i<game_object.players_index;i++)
+    {
+        if(player == player_score[i].pplayer)
+        {
+            score = player_score[i].score;
+            index = i;
+            break;
+        }
+    }
+    
+    xs = score_spots[score].cords.x*SCALE;
+    ys = score_spots[score].cords.y*SCALE;
+    ws = score_spots[score].width*SCALE;
+    hs = score_spots[score].height*SCALE;
+        
+    if(xr>(xs-sr)&&xr<(xs+ws)&&
+        yr>(ys-sr)&&yr<(ys+hs))
+    {
+        player_score[index].score = (player_score[index].score+1)%SPEED_SPOTS_NUMBER;
+    }
+}
+
 void remove_player(player_t** player)
 {
     int index = find_player_index(player);
@@ -130,6 +162,9 @@ void remove_player(player_t** player)
         game_object.players[i].player_rect.cords.y = game_object.players[i+1].player_rect.cords.y; 
         game_object.players[i].player_rect.game_result = game_object.players[i+1].player_rect.game_result;
         game_object.players[i].id = game_object.players[i+1].id;
+
+        player_score[i].pplayer = player_score[i+1].pplayer;
+        player_score[i].score = player_score[i+1].score;
     }
 
     game_object.players_index--;
@@ -155,28 +190,32 @@ bool_t check_if_in_field(rect_t_player rect, rect_t* fields, char fields_size)
     return FALSE;
 }
 
-int check_game_result(player_t** player)
+int check_game_result(player_t* player)
 {
-    int index = find_player_index(player);
-    if(index==-1)return -1;
+    int index, score;
+
+    for(int i=0;i<game_object.players_index;i++)
+    {
+        if(player == player_score[i].pplayer)
+        {
+            score = player_score[i].score;
+            index = i;
+            break;
+        }
+    }
 
     if(win_allowed == TRUE && game_object.players_index == 1)return WIN;
     
-    int dx,dy, max_dx=0, max_dy=0;
+    int dscore;
 
     for(int i=0;i<game_object.players_index;i++)
     {
         if(i!=index)
         {
-            dx = abs((*player)->player_rect.cords.x - game_object.players[i].player_rect.cords.x);
-            dy = abs((*player)->player_rect.cords.y - game_object.players[i].player_rect.cords.y);
-            if(dx>max_dx)max_dx=dx;
-            if(dy>max_dy)max_dy=dy;
+            dscore = player_score[i].score - score;
+            if(dscore >= WIN_ADVANTAGE)return LOSE;
         }
     }
-
-    if(max_dx>BOARD_WIDTH*SCALE/2)return LOSE;
-    if(max_dy>BOARD_HEIGHT*SCALE/2)return LOSE;
 
     return PLAY;
 }
@@ -231,9 +270,9 @@ void make_move(player_t** player, move_t move)
     &&(*player)->vel < MAX_SPEED)
         (*player)->vel+=SPEED_SPOTS_BONUS;
     
-    
+    check_score_spots(*player);
 
-    (*player)->player_rect.game_result = check_game_result(player);
+    (*player)->player_rect.game_result = check_game_result(*player);
     return;
     
 }
@@ -257,12 +296,6 @@ void init_game(int max_client_number)
 
     game_object.speed_spots = (rect_t*)ss;
 
-    /*
-    
-        TODO: SET SCORE SPOTS
-
-    */
-
    for(int i=0;i<max_client_number;i++)
    {
        game_object.players[i].vel = 0;
@@ -271,37 +304,6 @@ void init_game(int max_client_number)
        game_object.players[i].player_rect.cords.x = BANNED_X;
        game_object.players[i].player_rect.cords.y = BANNED_Y;
    }
-}
-
-void check_score_spots(player_t* player)
-{
-    int xr,yr,sr;
-    int score, index;
-    int xs,ys,ws,hs;
-    xr = player->player_rect.cords.x;
-    yr = player->player_rect.cords.y;
-    sr = player->player_rect.size;
-
-    for(int i=0;i<game_object.players_index;i++)
-    {
-        if(player == player_score[i].pplayer)
-        {
-            score = player_score[i].score;
-            index = i;
-            break;
-        }
-    }
-    /*
-    xs = score[index].cords
-    ys = fields[i].cords.y*SCALE;
-    ws = fields[i].width*SCALE;
-    hs = fields[i].height*SCALE;
-        
-        //if player is in obstacle area
-        if(xr>(xf-sr)&&xr<(xf+wf)&&
-            yr>(yf-sr)&&yr<(yf+hf))return TRUE;
-    
-    return FALSE;*/
 }
 
 void send_s(int socket)

@@ -1,11 +1,18 @@
 #include "game_structure.h"
 
 typedef enum bool_t bool_t;
+typedef struct player_score_t player_score_t;
 
 enum bool_t
 {
 	FALSE,
 	TRUE,
+};
+
+struct player_score_t
+{
+	player_t* pplayer;
+	int score;
 };
 
 void init_player(player_t** player);
@@ -18,7 +25,7 @@ void init_game(int max_client_number);
 
 bool_t check_if_in_field(rect_t_player rect, rect_t* fields, char fields_size);
 
-int check_game_result(player_t** player);
+int check_game_result(player_t* player);
 
 int find_player_index(player_t** player);
 
