@@ -154,6 +154,7 @@ int main()
                         //TODO
                         direction = END;
                         pthread_cancel(mr);
+                        running = 0;
                         printf("\nPrzegrales :(\n");
                         SDL_Delay(1000);
 
@@ -162,6 +163,7 @@ int main()
                         //TODO
                         direction = END;
                         pthread_cancel(mr);
+                        running = 0;
                         printf("\nWygrales :)\n");
                         SDL_Delay(1000);
                     }
