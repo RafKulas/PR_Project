@@ -5,7 +5,7 @@
 #define OBSTACLES_NUMBER 19
 #define SPEED_SPOTS_NUMBER 7
 #define SPEED_SPOTS_BONUS 5 // add bonus to player vel 
-#define MAX_SPEED 15 // maximum speed of player 
+#define MAX_SPEED 16 // maximum speed of player 
 #define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce 
 
 #define SCORE_SPOTS_NUMBER 6 // ??? TO CHANGE BY GAME DESIGNER
@@ -25,7 +25,7 @@
 #define START_Y 50 
 
 //initial vel of player
-#define START_VEL 5 
+#define START_VEL 6 
 
 #define WIN 1
 #define LOSE 2
@@ -60,13 +60,13 @@ rect_t obs[19] = {
 };
 
 rect_t ss[SPEED_SPOTS_NUMBER] = {
-        {{28,   12}, 2, 2},
+        {{29,   12}, 1, 2},
         {{11, 7}, 6, 2},
         {{19, 7},6, 2},
-        {{13, 15}, 2, 2},
-        {{3, 11}, 2, 2},
-        {{11, 3}, 2, 2},
-        {{29, 1}, 2, 2}
+        {{13, 15}, 1, 2},
+        {{3, 11}, 1, 2},
+        {{11, 3}, 1, 2},
+        {{29, 1}, 1, 2}
 };
 
 rect_t score_spots[SCORE_SPOTS_NUMBER] = {
@@ -231,7 +231,7 @@ void make_move(player_t** player, move_t move)
     int i;
 
     //look for maximum speed, that player can go 
-    for(i=0;i<=(*player)->vel;i++)
+    for(i=0;i<=(*player)->vel;i+=2)
     {
         switch (move)
         {
