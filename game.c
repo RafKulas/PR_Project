@@ -155,7 +155,7 @@ int check_game_result(player_t** player)
     if(max_dx>BOARD_WIDTH*SCALE)return LOSE;
     if(max_dy>BOARD_HEIGHT*SCALE)return LOSE;
 
-    
+    return PLAY;
 }
 
 void make_move(player_t** player, move_t move)
