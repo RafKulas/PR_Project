@@ -47,8 +47,8 @@ void send_structure(int sock, game_object_t* pdata)
 		*(int*)&(buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 1]) = pdata->players[i].player_rect.cords.y;
 		*(int*)&(buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2]) = pdata->players[i].player_rect.size;
 		*(int*)&(buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 3]) = pdata->players[i].player_rect.game_result;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2] = pdata->players[i].id;
-		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2 + 1] = pdata->players[i].vel;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4] = pdata->players[i].id;
+		buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4 + 1] = pdata->players[i].vel;
 	}
 
 	send(sock, (char *)(buffer), (1 + buffer[0] * PLAYER_SIZE) * CHAR_SIZE, NO_FLAGS);
@@ -101,8 +101,8 @@ void recv_structure(int sock, game_object_t* pdata)
 		pdata->players[i].player_rect.cords.y = *(int*)&buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 1];
 		pdata->players[i].player_rect.size = *(int*)&buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2];
 		pdata->players[i].player_rect.game_result = *(int*)&buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 3];
-		pdata->players[i].id = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2];
-		pdata->players[i].vel = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 2 + 1];
+		pdata->players[i].id = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4];
+		pdata->players[i].vel = buffer[PLAYER_SIZE * i + 1 + INT_SIZE * 4 + 1];
 	}
 
 }
