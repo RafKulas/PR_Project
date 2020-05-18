@@ -28,6 +28,7 @@
 #define SCALE 30
 
 game_object_t game_object;
+bool_t win_allowed;
 
 rect_t obs[19] = {
         {{0,   0}, 32, 1},
@@ -66,7 +67,7 @@ void init_player(player_t** player)
     game_object.ID++;
     (*player)->id = game_object.ID;
 
-    if(game_object.players_index==1)game_object.win_allowed = TRUE;
+    if(game_object.players_index==1)win_allowed = TRUE;
     game_object.players_index++;
 }
 
@@ -128,7 +129,7 @@ int check_game_result(player_t** player)
     int index = find_player_index(player);
     if(index==-1)return -1;
 
-    if(game_object.win_allowed == TRUE && game_object.players_index == 1)return WIN;
+    if(win_allowed == TRUE && game_object.players_index == 1)return WIN;
     
     int dx,dy, max_dx=0, max_dy=0;
 
@@ -210,7 +211,7 @@ void init_game(int max_client_number)
     game_object.speed_spots_number = SPEED_SPOTS_NUMBER;
     game_object.board_width = BOARD_WIDTH;
     game_object.board_height = BOARD_HEIGHT;
-    game_object.win_allowed = FALSE;
+    win_allowed = FALSE;
     
     game_object.players_index = 0;
     game_object.ID = 0;
