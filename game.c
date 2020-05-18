@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define OBSTACLES_NUMBER 19
-#define SPEED_SPOTS_NUMBER 2 // ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_NUMBER 1 // ??? TO CHANGE BY BOARD DESIGNER
 #define SPEED_SPOTS_BONUS 1 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
 #define MAX_SPEED 10 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
 #define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce ??? TO CHANGE BY BOARD DESIGNER
@@ -55,11 +55,10 @@ rect_t obs[19] = {
         {{21, 1},  2,  2}
 };
 
-rect_t spd[2] =
-{
-    {{50,   50}, 10, 10},
-    {{100,   100}, 10, 10},
+rect_t ss[1] = {
+        {{28,   12}, 3, 3}
 };
+
 
 
 void init_player(player_t** player)
@@ -229,8 +228,9 @@ void init_game(int max_client_number)
     game_object.ID = 0;
 
     game_object.obstacles = (rect_t*)obs;
+    game_object.speed_spots = (rect_t*)ss;
 
-    game_object.speed_spots = (rect_t*)spd;
+    game_object.speed_spots = (rect_t*)ss;
 
    for(int i=0;i<max_client_number;i++)
    {
