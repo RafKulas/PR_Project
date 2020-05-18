@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define OBSTACLES_NUMBER 19
-#define SPEED_SPOTS_NUMBER 1 // ??? TO CHANGE BY BOARD DESIGNER
+#define SPEED_SPOTS_NUMBER 1
 #define SPEED_SPOTS_BONUS 1 // add bonus to player vel ??? TO CHANGE BY BOARD DESIGNER
 #define MAX_SPEED 10 // maximum speed of player ??? TO CHANGE BY BOARD DESIGNER
 #define SPEED_REDUCE 1 // if player has greater speed than start one - speed will be reduce ??? TO CHANGE BY BOARD DESIGNER
