@@ -213,7 +213,7 @@ void remove_client(int socket)
     for(int i=index;i<(clients_array.index-1);i++)
     {
         //move next element to previous one
-        clients_array.clients_array[i].pplayer = clients_array.clients_array[i+1].pplayer;
+        //clients_array.clients_array[i].pplayer = clients_array.clients_array[i+1].pplayer;
         clients_array.clients_array[i].client_socket = clients_array.clients_array[i+1].client_socket;
         clients_array.requests[i] = clients_array.requests[i+1];
     }
