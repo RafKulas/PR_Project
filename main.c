@@ -171,6 +171,18 @@ int main()
 
                     }
                     else {
+                        if(direction==UP) {
+                            game2->players[i].player_rect.cords.y-=2;
+                        }
+                        else if(direction==DOWN) {
+                            game2->players[i].player_rect.cords.y+=2;
+                        }
+                        else if(direction==RIGHT) {
+                            game2->players[i].player_rect.cords.x+=2;
+                        }
+                        else if(direction==LEFT) {
+                            game2->players[i].player_rect.cords.x-=2;
+                        }
                         i = game2->players_index;
                     }
                 }
